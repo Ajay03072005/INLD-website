@@ -98,7 +98,7 @@ const Navbar = () => {
             <MdContactPhone className="navbar__icon" />
             <span>Contact</span>
           </Link>
-          <Link to="/join" className="navbar__cta-button" onClick={() => setIsOpen(false)}>
+          <Link to="/admin" className="navbar__cta-button" onClick={() => setIsOpen(false)}>
             <RiAdminFill className="navbar__icon" />
             <span>Admin</span>
           </Link>

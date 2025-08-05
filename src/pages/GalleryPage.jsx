@@ -7,7 +7,6 @@ const GalleryPage = () => {
   const [selectedVideo, setSelectedVideo] = useState(null);
 
   const events = [
-    // Photo Gallery Items
     {
       id: 1,
       title: 'INLD Rally in Delhi',
@@ -56,7 +55,7 @@ const GalleryPage = () => {
       image: 'https://pbs.twimg.com/media/F63uw1-aEAAN3cE?format=jpg&name=360x360',
       type: 'photo'
     },
-    // Video Gallery Items
+    
     {
       id: 7,
       title: 'INLD मुस्लिम जनाजा का हिन्दू धर्म के अनुसार अंतिम संस्कार | Muslim Janaza Ka Hindu Dharm Ke Anusar Antim Sanskar',

@@ -10,13 +10,15 @@
 
 .navbar__container {
   width: 100%;
-  margin: 0;
-  padding: 0.75rem 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0.75rem 1rem;
   display: flex;
   justify-content: flex-start;
   align-items: center;
   height: 65px;
   background-color: #ffffff;
+  position: relative;
 }
 
 .navbar__logo {
@@ -28,7 +30,8 @@
   font-weight: bold;
   transition: transform 0.3s ease;
   min-width: 120px;
-  margin-right: 3rem;
+  margin-right: auto;
+  padding-left: 0;
   flex-shrink: 0;
 }
 
@@ -44,12 +47,22 @@
 .navbar__links {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 1.5rem;
   height: 100%;
   flex: 1;
-  justify-content: space-between;
-  max-width: 1000px;
-  margin: 0 auto;
+  justify-content: center;
+  padding-left: 2rem;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .navbar__link {
@@ -166,21 +179,26 @@
 }
 
 @media screen and (max-width: 1024px) {
+  .navbar__container {
+    justify-content: space-between;
+  }
+
   .navbar__menu-icon {
     display: flex;
+    position: relative;
+    margin-left: 1rem;
+    z-index: 1001;
+    right: 0;
   }
 
-  .navbar__logo span {
-    display: none;
-  }
-
-  .navbar__logo-img {
-    margin-right: 0;
+  .navbar__logo {
+    order: 1;
+    margin-right: auto;
   }
 
   .navbar__links {
-    position: absolute;
-    top: 100%;
+    position: fixed;
+    top: 65px;
     left: 0;
     right: 0;
     background-color: white;
@@ -188,33 +206,70 @@
     align-items: stretch;
     padding: 1rem;
     gap: 0.5rem;
-    transform: translateY(-100%);
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.3s ease;
+    display: none;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     max-height: calc(100vh - 65px);
     overflow-y: auto;
   }
 
-  .navbar__link, 
-  .navbar__cta-button {
-    justify-content: flex-start;
+  .navbar__links.active {
+    display: flex;
+    animation: slideIn 0.3s ease forwards;
+  }
+
+  .navbar__link {
+    padding: 0.8rem;
+    border-radius: 0;
+    border-bottom: 1px solid #e0e0e0;
     width: 100%;
+    justify-content: flex-start;
+  }
+
+  .navbar__link:last-child {
+    border-bottom: none;
+  }
+
+  .navbar__cta-button {
+    margin: 0.5rem 0;
+    width: 100%;
+    justify-content: center;
     padding: 0.8rem 1rem;
   }
 
-  .navbar__links.active {
-    transform: translateY(0);
-    opacity: 1;
-    visibility: visible;
+  .menu-icon__bar.open:nth-child(1) {
+    transform: rotate(45deg) translate(6px, 6px);
   }
+
+  .menu-icon__bar.open:nth-child(2) {
+    opacity: 0;
+  }
+
+  .menu-icon__bar.open:nth-child(3) {
+    transform: rotate(-45deg) translate(6px, -6px);
+  }
+
+  .navbar__links.active .navbar__link,
+  .navbar__links.active .navbar__cta-button {
+    animation: slideIn 0.3s ease forwards;
+    opacity: 0;
+  }
+
+  .navbar__links.active .navbar__link:nth-child(1) { animation-delay: 0.1s; }
+  .navbar__links.active .navbar__link:nth-child(2) { animation-delay: 0.2s; }
+  .navbar__links.active .navbar__link:nth-child(3) { animation-delay: 0.3s; }
+  .navbar__links.active .navbar__link:nth-child(4) { animation-delay: 0.4s; }
+  .navbar__links.active .navbar__link:nth-child(5) { animation-delay: 0.5s; }
+  .navbar__links.active .navbar__link:nth-child(6) { animation-delay: 0.6s; }
+  .navbar__links.active .navbar__link:nth-child(7) { animation-delay: 0.7s; }
+  .navbar__links.active .navbar__link:nth-child(8) { animation-delay: 0.8s; }
+  .navbar__links.active .navbar__cta-button { animation-delay: 0.9s; }
 }
 
 
 @media screen and (max-width: 768px) {
   .navbar__container {
     padding: 0.75rem 1rem;
+    max-width: 100%;
   }
 
   .navbar__logo {

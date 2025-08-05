@@ -1,0 +1,40 @@
+<svg width="400" height="350" viewBox="0 0 400 350" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="visionBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4CAF50"/>
+      <stop offset="50%" style="stop-color:#2196F3"/>
+      <stop offset="100%" style="stop-color:#FF9800"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="350" rx="10" fill="url(#visionBg)"/>
+  
+  <!-- Haryana Map Outline -->
+  <g transform="translate(150, 100)" opacity="0.3">
+    <path d="M50 25L75 40L90 60L85 80L65 90L40 85L30 65L35 45Z" fill="white" stroke="white" stroke-width="2"/>
+  </g>
+  
+  <!-- Development Icons -->
+  <g opacity="0.4">
+    <!-- Buildings -->
+    <rect x="50" y="200" width="15" height="30" fill="white"/>
+    <rect x="70" y="180" width="15" height="50" fill="white"/>
+    <rect x="90" y="190" width="15" height="40" fill="white"/>
+    
+    <!-- Roads -->
+    <path d="M30 250L370 250" stroke="white" stroke-width="4"/>
+    <path d="M200 50L200 300" stroke="white" stroke-width="4"/>
+    
+    <!-- Agriculture -->
+    <circle cx="300" cy="100" r="3" fill="white"/>
+    <path d="M300 103V130" stroke="white" stroke-width="2"/>
+    <path d="M290 120L310 120" stroke="white" stroke-width="2"/>
+    
+    <!-- Education -->
+    <rect x="320" y="200" width="20" height="15" fill="white"/>
+    <circle cx="330" cy="190" r="5" fill="white"/>
+  </g>
+  
+  <!-- Progress Arrow -->
+  <path d="M50 175L350 175" stroke="white" stroke-width="6" opacity="0.5"/>
+  <path d="M330 165L350 175L330 185" stroke="white" stroke-width="6" fill="white" opacity="0.5"/>
+</svg>
