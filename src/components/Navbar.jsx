@@ -24,7 +24,8 @@ const Navbar = () => {
       <div className="navbar__container">
         <Link to="/" className="navbar__logo">
           <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSMiDBg0T6c-XNVLF5aYUQ5gtzxWtp9IKat-w&s" alt="INLD Logo" className="navbar__logo-img" />
-          <span>INLD</span>
+          <span>Indian National Lok Dal</span>
+          <span>     </span>
         </Link>
 
         <div className="navbar__menu-icon" onClick={toggleMenu}>

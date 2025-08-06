@@ -8,7 +8,7 @@ const Footer = () => {
       <div className="footer-content">
         <div className="footer-section">
           <div className="footer-logo">
-            <img src="/logo.png" alt="INLD" className="logo" />
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSMiDBg0T6c-XNVLF5aYUQ5gtzxWtp9IKat-w&s" alt="INLD" className="logo" />
             <div className="logo-text">
               <h2>Indian National Lok Dal</h2>
               <p>Serving the Nation</p>

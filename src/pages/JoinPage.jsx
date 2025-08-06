@@ -91,11 +91,81 @@ const JoinPage = () => {
 
         <div className="form-row">
           <div className="form-group">
-            <label>Constituency</label>
-            <select>
-              <option value="">Select your constituency</option>
-            </select>
-          </div>
+  <label>Constituency *</label>
+  <select required>
+    <option value="">Select your constituency</option>
+    <option value="Adampur">Adampur</option>
+    <option value="Ambala Cantt">Ambala Cantt</option>
+    <option value="Ambala City">Ambala City</option>
+    <option value="Assandh">Assandh</option>
+    <option value="Ateli">Ateli</option>
+    <option value="Badkhal">Badkhal</option>
+    <option value="Badshahpur">Badshahpur</option>
+    <option value="Bahadurgarh">Bahadurgarh</option>
+    <option value="Baroda">Baroda</option>
+    <option value="Bawal">Bawal</option>
+    <option value="Beri">Beri</option>
+    <option value="Bhiwani">Bhiwani</option>
+    <option value="Ellenabad">Ellenabad</option>
+    <option value="Faridabad">Faridabad</option>
+    <option value="Faridabad NIT">Faridabad NIT</option>
+    <option value="Fatehabad">Fatehabad</option>
+    <option value="Ferozepur Jhirka">Ferozepur Jhirka</option>
+    <option value="Ganaur">Ganaur</option>
+    <option value="Garhi Sampla-Kiloi">Garhi Sampla-Kiloi</option>
+    <option value="Gharaunda">Gharaunda</option>
+    <option value="Gohana">Gohana</option>
+    <option value="Gurgaon">Gurgaon</option>
+    <option value="Hansi">Hansi</option>
+    <option value="Hisar">Hisar</option>
+    <option value="Indri">Indri</option>
+    <option value="Israna">Israna</option>
+    <option value="Jagadhri">Jagadhri</option>
+    <option value="Jind">Jind</option>
+    <option value="Julana">Julana</option>
+    <option value="Kalanaur">Kalanaur</option>
+    <option value="Kalayat">Kalayat</option>
+    <option value="Kalka">Kalka</option>
+    <option value="Karnal">Karnal</option>
+    <option value="Kosli">Kosli</option>
+    <option value="Ladwa">Ladwa</option>
+    <option value="Loharu">Loharu</option>
+    <option value="Mahendragarh">Mahendragarh</option>
+    <option value="Meham">Meham</option>
+    <option value="Mewla Maharajpur">Mewla Maharajpur</option>
+    <option value="Narnaul">Narnaul</option>
+    <option value="Narnaund">Narnaund</option>
+    <option value="Narwana">Narwana</option>
+    <option value="Nilokheri">Nilokheri</option>
+    <option value="Nuh">Nuh</option>
+    <option value="Panchkula">Panchkula</option>
+    <option value="Panipat City">Panipat City</option>
+    <option value="Panipat Rural">Panipat Rural</option>
+    <option value="Pehowa">Pehowa</option>
+    <option value="Pundri">Pundri</option>
+    <option value="Punhana">Punhana</option>
+    <option value="Radaur">Radaur</option>
+    <option value="Rania">Rania</option>
+    <option value="Rewari">Rewari</option>
+    <option value="Rohtak">Rohtak</option>
+    <option value="Safidon">Safidon</option>
+    <option value="Samalkha">Samalkha</option>
+    <option value="Sampla">Sampla</option>
+    <option value="Saraswati">Saraswati</option>
+    <option value="Shahbad">Shahbad</option>
+    <option value="Sirsa">Sirsa</option>
+    <option value="Sohna">Sohna</option>
+    <option value="Sonipat">Sonipat</option>
+    <option value="Taraori">Taraori</option>
+    <option value="Thanesar">Thanesar</option>
+    <option value="Tigaon">Tigaon</option>
+    <option value="Tosham">Tosham</option>
+    <option value="Uchana Kalan">Uchana Kalan</option>
+    <option value="Yamunanagar">Yamunanagar</option>
+  </select>
+</div>
+
+
           <div className="form-group">
             <label>Profession</label>
             <input type="text" placeholder="Your occupation" />
