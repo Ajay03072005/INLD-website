@@ -1,8 +1,6 @@
-// src/App.js
 import React from "react";
-import Navbar from "./Navbar"; // Assuming you have this component
 import { FaFacebookF, FaTwitter, FaYoutube } from "react-icons/fa";
-import "./App.css";
+import "../styles/Leadership.css";
 
 // --- Data for the cards ---
 // ALL the content for each card is now here. Edit this to change what each card displays.
@@ -131,9 +129,9 @@ const Card = ({ data, index }) => {
         <div className="info-section">
           <h2>Connect</h2>
           <div className="connect-links">
-            <a href="#twitter"><TwitterIcon /> {data.connect.twitter}</a>
-            <a href="#facebook"><FacebookIcon /> {data.connect.facebook}</a>
-            <a href="#email"><EmailIcon /> {data.connect.email}</a>
+            <a href="https://twitter.com/inldofficial" target="_blank" rel="noopener noreferrer" aria-label="Twitter"><TwitterIcon /> {data.connect.twitter}</a>
+            <a href="https://facebook.com/inldofficial" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><FacebookIcon /> {data.connect.facebook}</a>
+            <a href="mailto:info@inld.org" aria-label="Email"><EmailIcon /> {data.connect.email}</a>
           </div>
         </div>
       </div>
@@ -142,28 +140,26 @@ const Card = ({ data, index }) => {
 };
 
 
-function App() {
+const Leadership = () => {
   return (
-    <div>
-      <Navbar />
+    <div className="leadership-page">
+      <div className="leadership-container">
+        <div className="leadership-header">
+          <h1>Our Leadership</h1>
+          <p>
+            Meet the leaders who have shaped INLD's journey and continue to work for the
+            development of Haryana and the welfare of its people.
+          </p>
+        </div>
 
-      {/* Leadership Section */}
-      <div className="leadership-section">
-        <h1>Our Leadership</h1>
-        <p>
-          Meet the leaders who have shaped INLD's journey and continue to work for the
-          development of Haryana and the welfare of its people.
-        </p>
-      </div>
-
-      {/* === The new card section now reads from the cardData array === */}
-      <section className="hero-section-wrapper">
-          <div className="cards-grid">
-              {cardData.map((card, index) => (
-                  <Card key={card.id} data={card} index={index} />
-              ))}
-          </div>
-      </section>
+        {/* === The new card section now reads from the cardData array === */}
+        <section className="hero-section-wrapper">
+            <div className="cards-grid">
+                {cardData.map((card, index) => (
+                    <Card key={card.id} data={card} index={index} />
+                ))}
+            </div>
+        </section>
 
       {/* Chautala Legacy Section */}
       <div className="legacy-section">
@@ -222,52 +218,10 @@ function App() {
       </div>
 
       {/* Footer Section */}
-      <footer className="footer">
-        <div className="footer-container">
-          <div className="footer-about">
-            <div className="footer-logo">
-              <div className="logo-circle">INLD</div>
-              <div>
-                <h3>Indian National Lok Dal</h3>
-                <p>Serving the Nation</p>
-              </div>
-            </div>
-            <p>
-              Committed to building a prosperous, inclusive, and sustainable India 
-              where every citizen has equal opportunities to grow and contribute.
-            </p>
-          </div>
-          <div className="footer-links">
-            <h4>Quick Links</h4>
-            <a href="#">About INLD</a>
-            <a href="#">Our Manifesto</a>
-            <a href="#">Leadership</a>
-            <a href="#">News & Events</a>
-          </div>
-           <div className="footer-contact">
-            <h4>Contact</h4>
-            <p>123 Janpath, New Delhi</p>
-            <p>Phone: +91-11-2345-6789</p>
-            <p>Email: info@inld.org.in</p>
-            <div className="social-icons">
-              <span className="follow-text">Follow us:</span>
-              <a href="#" aria-label="Facebook"><FaFacebookF /></a>
-              <a href="#" aria-label="Twitter"><FaTwitter /></a>
-              <a href="#" aria-label="YouTube"><FaYoutube /></a>
-            </div>
-          </div>
-        </div>
-        <div className="footer-bottom">
-          <p>© 2025 Indian National Lok Dal. All rights reserved.</p>
-          <div>
-            <a href="#">Privacy Policy</a>
-            <a href="#">Terms of Service</a>
-            <a href="#">Disclaimer</a>
-          </div>
-        </div>
-      </footer>
+     
+      </div>
     </div>
   );
-}
+};
 
-export default App;
+export default Leadership;

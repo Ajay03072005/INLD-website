@@ -138,6 +138,58 @@
   line-height: 1.6;
 }
 
+/* New Leadership Page Styles */
+.leadership-page {
+  min-height: 100vh;
+  background: #f8fafc;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.leadership-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 80px 20px 40px;
+}
+
+.leadership-header {
+  text-align: center;
+  margin-bottom: 60px;
+  padding: 40px 20px;
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.leadership-header h1 {
+  color: #1e293b;
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+  position: relative;
+  line-height: 1.3;
+}
+
+.leadership-header h1::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(90deg, #00a651, #059669);
+  border-radius: 2px;
+}
+
+.leadership-header p {
+  color: #64748b;
+  font-size: 1.2rem;
+  max-width: 700px;
+  margin: 30px auto 0;
+  line-height: 1.7;
+  font-weight: 400;
+}
+
 /* Legacy Section */
 .legacy-section {
   background: #E6f4ec;
@@ -630,5 +682,40 @@
     /* On mobile, make the organization grid 1 column */
     .organization-grid {
       grid-template-columns: 1fr;
+    }
+    
+    /* Mobile styles for leadership header */
+    .leadership-container {
+        padding: 60px 15px 30px;
+    }
+    
+    .leadership-header {
+        padding: 30px 15px;
+        margin-bottom: 40px;
+    }
+    
+    .leadership-header h1 {
+        font-size: 2.2rem;
+        line-height: 1.4;
+    }
+    
+    .leadership-header p {
+        font-size: 1rem;
+        margin: 20px auto 0;
+    }
+}
+
+/* Additional mobile styles for very small screens */
+@media (max-width: 480px) {
+    .leadership-header h1 {
+        font-size: 1.8rem;
+    }
+    
+    .leadership-header p {
+        font-size: 0.95rem;
+    }
+    
+    .leadership-header {
+        padding: 25px 10px;
     }
 }
