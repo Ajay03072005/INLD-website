@@ -1,11 +1,28 @@
 import React, { useState } from 'react';
 import '../styles/NewsPage.css';
-import { FaCalendarAlt, FaMapMarkerAlt, FaClock, FaTimes } from 'react-icons/fa';
+import { FaCalendarAlt, FaMapMarkerAlt, FaClock, FaTimes, FaUser, FaEnvelope, FaPhone } from 'react-icons/fa';
+import { apiRequest, API_ENDPOINTS } from '../utils/api';
 
 const NewsPage = () => {
   const [activeTab, setActiveTab] = useState('upcoming');
   const [selectedNews, setSelectedNews] = useState(null);
   const [selectedEvent, setSelectedEvent] = useState(null);
+  const [showRegistrationForm, setShowRegistrationForm] = useState(false);
+  const [selectedEventForRegistration, setSelectedEventForRegistration] = useState(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitMessage, setSubmitMessage] = useState('');
+  const [registrationData, setRegistrationData] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: '',
+    address: '',
+    eventId: '',
+    eventTitle: '',
+    specialRequirements: '',
+    agreeTerms: false
+  });
+  const [errors, setErrors] = useState({});
 
   const events = [
     {
@@ -441,6 +458,113 @@ Target Areas: 12 drought-prone districts`,
     }
   ];
 
+  // Registration form functions
+  const validateRegistrationForm = () => {
+    const newErrors = {};
+
+    if (!registrationData.firstName.trim()) newErrors.firstName = 'First name is required';
+    if (!registrationData.lastName.trim()) newErrors.lastName = 'Last name is required';
+    if (!registrationData.email.trim()) {
+      newErrors.email = 'Email is required';
+    } else if (!/\S+@\S+\.\S+/.test(registrationData.email)) {
+      newErrors.email = 'Email is invalid';
+    }
+    if (!registrationData.phone.trim()) {
+      newErrors.phone = 'Phone number is required';
+    } else if (!/^\+?[\d\s-()]+$/.test(registrationData.phone)) {
+      newErrors.phone = 'Phone number is invalid';
+    }
+    if (!registrationData.address.trim()) newErrors.address = 'Address is required';
+    if (!registrationData.agreeTerms) newErrors.agreeTerms = 'You must agree to terms and conditions';
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleRegistrationInputChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    setRegistrationData(prev => ({
+      ...prev,
+      [name]: type === 'checkbox' ? checked : value
+    }));
+
+    // Clear error when user starts typing
+    if (errors[name]) {
+      setErrors(prev => ({
+        ...prev,
+        [name]: ''
+      }));
+    }
+  };
+
+  const handleRegisterClick = (event) => {
+    setSelectedEventForRegistration(event);
+    setRegistrationData(prev => ({
+      ...prev,
+      eventId: event.id,
+      eventTitle: event.title
+    }));
+    setShowRegistrationForm(true);
+    setSubmitMessage('');
+    setErrors({});
+  };
+
+  const closeRegistrationForm = () => {
+    setShowRegistrationForm(false);
+    setSelectedEventForRegistration(null);
+    setRegistrationData({
+      firstName: '',
+      lastName: '',
+      email: '',
+      phone: '',
+      address: '',
+      eventId: '',
+      eventTitle: '',
+      specialRequirements: '',
+      agreeTerms: false
+    });
+    setErrors({});
+    setSubmitMessage('');
+  };
+
+  const handleRegistrationSubmit = async (e) => {
+    e.preventDefault();
+    
+    if (!validateRegistrationForm()) {
+      setSubmitMessage('Please fix the errors above');
+      return;
+    }
+
+    setIsSubmitting(true);
+    setSubmitMessage('');
+
+    try {
+      const result = await apiRequest(API_ENDPOINTS.EVENTS, {
+        method: 'POST',
+        body: JSON.stringify({
+          ...registrationData,
+          timestamp: new Date().toISOString(),
+          source: 'website',
+          type: 'event_registration'
+        }),
+      });
+      
+      if (result.success) {
+        setSubmitMessage('Registration successful! You will receive a confirmation email shortly.');
+        setTimeout(() => {
+          closeRegistrationForm();
+        }, 2000);
+      } else {
+        setSubmitMessage(result.message || 'Registration failed. Please try again.');
+      }
+    } catch (error) {
+      console.error('Error submitting registration:', error);
+      setSubmitMessage('Network error. Please check your connection and try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <div className="news-page">
       <div className="news-header">
@@ -492,7 +616,12 @@ Target Areas: 12 drought-prone districts`,
                 </div>
                 <p className="event-description">{event.description}</p>
                 <div className="event-buttons">
-                  <button className="register-btn">Register Now</button>
+                  <button 
+                    className="register-btn"
+                    onClick={() => handleRegisterClick(event)}
+                  >
+                    Register Now
+                  </button>
                   <button 
                     className="read-more-btn"
                     onClick={() => setSelectedEvent(event)}
@@ -611,6 +740,150 @@ Target Areas: 12 drought-prone districts`,
                   <p>{selectedNews.description}</p>
                 )}
               </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Registration Form Modal */}
+      {showRegistrationForm && (
+        <div className="registration-modal-overlay" onClick={closeRegistrationForm}>
+          <div className="registration-modal" onClick={e => e.stopPropagation()}>
+            <button className="close-modal" onClick={closeRegistrationForm}>
+              <FaTimes />
+            </button>
+            <div className="registration-content">
+              <h2>Register for Event</h2>
+              <h3>{selectedEventForRegistration?.title}</h3>
+              <p className="event-details">
+                <FaCalendarAlt /> {new Date(selectedEventForRegistration?.date).toLocaleDateString('en-US', {
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric'
+                })} | <FaClock /> {selectedEventForRegistration?.time} | <FaMapMarkerAlt /> {selectedEventForRegistration?.location}
+              </p>
+
+              {submitMessage && (
+                <div className={`message ${submitMessage.includes('successful') ? 'success' : 'error'}`}>
+                  {submitMessage}
+                </div>
+              )}
+
+              <form onSubmit={handleRegistrationSubmit} className="registration-form">
+                <div className="form-row">
+                  <div className="form-group">
+                    <label><FaUser /> First Name *</label>
+                    <input
+                      type="text"
+                      name="firstName"
+                      value={registrationData.firstName}
+                      onChange={handleRegistrationInputChange}
+                      placeholder="Enter your first name"
+                      required
+                      className={errors.firstName ? 'error' : ''}
+                    />
+                    {errors.firstName && <span className="error-text">{errors.firstName}</span>}
+                  </div>
+                  <div className="form-group">
+                    <label><FaUser /> Last Name *</label>
+                    <input
+                      type="text"
+                      name="lastName"
+                      value={registrationData.lastName}
+                      onChange={handleRegistrationInputChange}
+                      placeholder="Enter your last name"
+                      required
+                      className={errors.lastName ? 'error' : ''}
+                    />
+                    {errors.lastName && <span className="error-text">{errors.lastName}</span>}
+                  </div>
+                </div>
+
+                <div className="form-row">
+                  <div className="form-group">
+                    <label><FaEnvelope /> Email Address *</label>
+                    <input
+                      type="email"
+                      name="email"
+                      value={registrationData.email}
+                      onChange={handleRegistrationInputChange}
+                      placeholder="your.email@example.com"
+                      required
+                      className={errors.email ? 'error' : ''}
+                    />
+                    {errors.email && <span className="error-text">{errors.email}</span>}
+                  </div>
+                  <div className="form-group">
+                    <label><FaPhone /> Phone Number *</label>
+                    <input
+                      type="tel"
+                      name="phone"
+                      value={registrationData.phone}
+                      onChange={handleRegistrationInputChange}
+                      placeholder="+91 9876543210"
+                      required
+                      className={errors.phone ? 'error' : ''}
+                    />
+                    {errors.phone && <span className="error-text">{errors.phone}</span>}
+                  </div>
+                </div>
+
+                <div className="form-group">
+                  <label><FaMapMarkerAlt /> Address *</label>
+                  <input
+                    type="text"
+                    name="address"
+                    value={registrationData.address}
+                    onChange={handleRegistrationInputChange}
+                    placeholder="Complete address with city, state, PIN"
+                    required
+                    className={errors.address ? 'error' : ''}
+                  />
+                  {errors.address && <span className="error-text">{errors.address}</span>}
+                </div>
+
+                <div className="form-group">
+                  <label>Special Requirements (Optional)</label>
+                  <textarea
+                    name="specialRequirements"
+                    value={registrationData.specialRequirements}
+                    onChange={handleRegistrationInputChange}
+                    placeholder="Any special requirements or accessibility needs..."
+                    rows="3"
+                  />
+                </div>
+
+                <div className="checkbox-group">
+                  <label>
+                    <input
+                      type="checkbox"
+                      name="agreeTerms"
+                      checked={registrationData.agreeTerms}
+                      onChange={handleRegistrationInputChange}
+                      required
+                    />
+                    I agree to the terms and conditions for event registration *
+                  </label>
+                  {errors.agreeTerms && <span className="error-text">{errors.agreeTerms}</span>}
+                </div>
+
+                <div className="form-buttons">
+                  <button
+                    type="button"
+                    className="cancel-btn"
+                    onClick={closeRegistrationForm}
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="submit"
+                    className="submit-btn"
+                    disabled={isSubmitting}
+                  >
+                    {isSubmitting ? 'Registering...' : 'Complete Registration'}
+                  </button>
+                </div>
+              </form>
             </div>
           </div>
         </div>
