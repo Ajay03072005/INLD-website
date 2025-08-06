@@ -208,7 +208,6 @@
 
 .organization-grid {
   display: grid;
-  /* CHANGED: This now creates 4 equal columns */
   grid-template-columns: repeat(4, 1fr);
   gap: 30px;
   max-width: 1200px;
@@ -424,14 +423,15 @@
 .hero-section-wrapper {
   max-width: 1400px;
   margin: 2rem auto;
-  padding: 2rem;
+  padding: 2rem 4rem;
   font-family: 'Inter', sans-serif;
   background-color: var(--background-color);
 }
 
 .cards-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(720px, 1fr));
+  /* CHANGED: This ensures only one card per line */
+  grid-template-columns: 1fr;
   gap: 2rem;
   justify-content: center;
 }
@@ -444,6 +444,8 @@
   box-shadow: 0 4px 6px -1px var(--shadow-color), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
   overflow: hidden;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  max-width: 900px; /* Added a max-width to prevent cards from becoming too wide */
+  margin: 0 auto; /* Center the card within the grid column */
 }
 
 .profile-card:hover {
@@ -601,6 +603,56 @@
 
 /*
 * ===============================================
+* NEW STYLES FOR FILTERS
+* ===============================================
+*/
+.filter-section {
+  max-width: 1400px;
+  margin: 0 auto 2rem auto;
+  padding: 0 4rem;
+}
+
+.filter-container {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.search-bar {
+  flex-grow: 1;
+  padding: 12px 15px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  min-width: 250px;
+}
+
+.dropdown-container {
+  display: flex;
+  gap: 1rem;
+}
+
+.filter-dropdown {
+  padding: 12px 15px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  min-width: 200px;
+}
+
+.no-results {
+  width: 100%;
+  text-align: center;
+  font-size: 1.2rem;
+  color: var(--secondary-text);
+  padding: 3rem 0;
+}
+
+
+/*
+* ===============================================
 * RESPONSIVE ADJUSTMENTS
 * ===============================================
 */
@@ -630,5 +682,16 @@
     /* On mobile, make the organization grid 1 column */
     .organization-grid {
       grid-template-columns: 1fr;
+    }
+    .filter-section {
+      padding: 0 1rem;
+    }
+    .filter-container {
+      flex-direction: column;
+      align-items: stretch;
+    }
+    .dropdown-container {
+      flex-direction: column;
+      align-items: stretch;
     }
 }

@@ -1,12 +1,12 @@
 // src/App.js
-import React from "react";
+import React, { useState, useMemo } from "react";
 import Navbar from "./Navbar"; // Assuming you have this component
 import { FaFacebookF, FaTwitter, FaYoutube } from "react-icons/fa";
 import "./App.css";
 
 // --- Data for the cards ---
-// ALL the content for each card is now here. Edit this to change what each card displays.
-const cardData = [
+// I've added district and constituency to each leader for filtering.
+ const cardData = [
   {
     id: 1,
     imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Om_Prakash_Chautala.jpg/512px-Om_Prakash_Chautala.jpg',
@@ -93,6 +93,20 @@ const cardData = [
   },
 ];
 
+// --- Static lists for filters ---
+const allDistricts = [
+  'Ambala', 'Bhiwani', 'Charkhi Dadri', 'Faridabad', 'Fatehabad', 
+  'Gurugram (Gurgaon)', 'Hisar', 'Jhajjar', 'Jind', 'Kaithal', 'Karnal', 
+  'Kurukshetra', 'Mahendragarh', 'Nuh (Mewat)', 'Palwal', 'Panchkula', 
+  'Panipat', 'Rewari', 'Rohtak', 'Sirsa', 'Sonipat', 'Yamunanagar'
+];
+
+const allConstituencies = [
+  'Ambala (SC)', 'Kurukshetra', 'Sirsa (SC)', 'Hisar', 'Karnal', 
+  'Sonipat', 'Rohtak', 'Bhiwani–Mahendragarh', 'Gurgaon (Gurugram)', 'Faridabad'
+];
+
+
 // --- SVG Icons for the Cards ---
 const CalendarIcon = () => ( <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="icon"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg> );
 const TwitterIcon = () => ( <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="icon"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg> );
@@ -100,12 +114,11 @@ const FacebookIcon = () => ( <svg xmlns="http://www.w3.org/2000/svg" width="20" 
 const EmailIcon = () => ( <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="icon"><rect x="2" y="4" width="20" height="16" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg> );
 
 // --- Card Component ---
-// This component now reads all its data from props.
 const Card = ({ data, index }) => {
   const isOdd = index % 2 !== 0;
   return (
     <div className={`profile-card ${isOdd ? 'is-odd' : ''}`}>
-      <div className="card-image-container"><img src={data.imageUrl} alt="Profile" className="profile-image" onError={(e) => { e.target.onerror = null; e.target.src = 'https://placehold.co/400x600/ccc/FFFFFF?text=Image+Not+Found'; }} /><span className="image-badge">Ellenabad</span></div>
+      <div className="card-image-container"><img src={data.imageUrl} alt="Profile" className="profile-image" onError={(e) => { e.target.onerror = null; e.target.src = 'https://placehold.co/400x600/ccc/FFFFFF?text=Image+Not+Found'; }} /><span className="image-badge">{data.constituency}</span></div>
       <div className="card-content">
         <div className="header">
           <h1>{data.name}</h1>
@@ -143,6 +156,19 @@ const Card = ({ data, index }) => {
 
 
 function App() {
+  const [searchTerm, setSearchTerm] = useState('');
+  const [districtFilter, setDistrictFilter] = useState('');
+  const [constituencyFilter, setConstituencyFilter] = useState('');
+
+  const filteredData = useMemo(() => {
+    return cardData.filter(card => {
+      const nameMatch = card.name.toLowerCase().includes(searchTerm.toLowerCase());
+      const districtMatch = districtFilter ? card.district === districtFilter : true;
+      const constituencyMatch = constituencyFilter ? card.constituency === constituencyFilter : true;
+      return nameMatch && districtMatch && constituencyMatch;
+    });
+  }, [searchTerm, districtFilter, constituencyFilter]);
+
   return (
     <div>
       <Navbar />
@@ -156,12 +182,39 @@ function App() {
         </p>
       </div>
 
-      {/* === The new card section now reads from the cardData array === */}
+      {/* === Filter and Search Section === */}
+      <section className="filter-section">
+        <div className="filter-container">
+          <input
+            type="text"
+            placeholder="Search for a leader..."
+            className="search-bar"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+          <div className="dropdown-container">
+            <select className="filter-dropdown" value={districtFilter} onChange={(e) => setDistrictFilter(e.target.value)}>
+              <option value="">All Districts</option>
+              {allDistricts.map(district => <option key={district} value={district}>{district}</option>)}
+            </select>
+            <select className="filter-dropdown" value={constituencyFilter} onChange={(e) => setConstituencyFilter(e.target.value)}>
+              <option value="">All Constituencies</option>
+              {allConstituencies.map(constituency => <option key={constituency} value={constituency}>{constituency}</option>)}
+            </select>
+          </div>
+        </div>
+      </section>
+
+      {/* === The card section now uses the filtered data === */}
       <section className="hero-section-wrapper">
           <div className="cards-grid">
-              {cardData.map((card, index) => (
-                  <Card key={card.id} data={card} index={index} />
-              ))}
+              {filteredData.length > 0 ? (
+                filteredData.map((card, index) => (
+                    <Card key={card.id} data={card} index={index} />
+                ))
+              ) : (
+                <p className="no-results">No leaders found matching your criteria.</p>
+              )}
           </div>
       </section>
 
