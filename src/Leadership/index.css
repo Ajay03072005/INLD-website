@@ -1,0 +1,87 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: white;
+}
+
+/* Chautala Legacy Section */
+.legacy-section {
+  background: #e6f9ee;
+  padding: 40px;
+  border-radius: 12px;
+  max-width: 1100px;
+  margin: 40px auto;
+  text-align: center;
+}
+.legacy-section h2 {
+  font-size: 24px;
+  font-weight: bold;
+  color: #111827;
+  margin-bottom: 15px;
+}
+.legacy-section p {
+  font-size: 16px;
+  color: #333;
+  max-width: 900px;
+  margin: 0 auto 30px;
+  line-height: 1.6;
+}
+.legacy-features {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+.legacy-card {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  width: 280px;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+}
+.legacy-icon {
+  font-size: 30px;
+  margin-bottom: 10px;
+}
+.legacy-card h4 {
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+/* Party Organization Section */
+.organization-section {
+  text-align: center;
+  margin: 60px auto;
+  max-width: 1100px;
+}
+.organization-section h2 {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 30px;
+}
+.organization-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
+}
+.org-card {
+  background: white;
+  border: 1px solid #ddd;
+  padding: 25px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+}
+.org-icon {
+  font-size: 28px;
+  margin-bottom: 10px;
+}
+.org-card h4 {
+  font-weight: bold;
+  margin-bottom: 8px;
+}
