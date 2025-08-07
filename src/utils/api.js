@@ -12,6 +12,13 @@ export const API_ENDPOINTS = {
   CONTACT: `${API_BASE_URL}/api/contact`,
   NEWSLETTER: `${API_BASE_URL}/api/newsletter`,
   EVENTS: `${API_BASE_URL}/api/events`,
+  
+  // Admin endpoints
+  ADMIN_LOGIN: `${API_BASE_URL}/api/admin/login`,
+  ADMIN_DASHBOARD: `${API_BASE_URL}/api/admin/dashboard`,
+  ADMIN_REGISTRATIONS: `${API_BASE_URL}/api/admin/registrations`,
+  ADMIN_EVENTS: `${API_BASE_URL}/api/admin/events`,
+  ADMIN_NEWS: `${API_BASE_URL}/api/admin/news`,
 };
 export const apiRequest = async (url, options = {}) => {
   const defaultOptions = {
