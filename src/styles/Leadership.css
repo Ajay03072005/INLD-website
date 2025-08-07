@@ -658,40 +658,118 @@
 * NEW STYLES FOR FILTERS
 * ===============================================
 */
-.filter-section {
-  max-width: 1400px;
-  margin: 0 auto 2rem auto;
-  padding: 0 4rem;
+/* Modern Search and Filter Section */
+.search-filter-section {
+  margin: 2rem auto;
+  max-width: 800px;
 }
 
-.filter-container {
+.search-bar-container {
   display: flex;
-  gap: 1rem;
   align-items: center;
-  flex-wrap: wrap;
+  background: white;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+  padding: 0 0 0 15px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
 }
 
-.search-bar {
+.search-icon {
+  color: #64748b;
+  margin-right: 10px;
+}
+
+.search-input {
   flex-grow: 1;
-  padding: 12px 15px;
+  border: none;
+  padding: 14px 0;
   font-size: 16px;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-  min-width: 250px;
+  outline: none;
+  color: #334155;
+  background: transparent;
 }
 
-.dropdown-container {
+.search-input::placeholder {
+  color: #94a3b8;
+}
+
+.filter-toggle-btn {
   display: flex;
-  gap: 1rem;
+  align-items: center;
+  gap: 8px;
+  background: #f8fafc;
+  border: none;
+  border-left: 1px solid #e2e8f0;
+  padding: 14px 20px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #64748b;
+  cursor: pointer;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+  transition: all 0.2s ease;
 }
 
-.filter-dropdown {
-  padding: 12px 15px;
-  font-size: 16px;
-  border-radius: 8px;
-  border: 1px solid #ccc;
+.filter-toggle-btn:hover {
+  background: #f1f5f9;
+  color: #334155;
+}
+
+.filters-dropdown {
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  margin-top: 10px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  border: 1px solid #e2e8f0;
+}
+
+.filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.filter-group label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #475569;
+}
+
+.filter-select {
+  padding: 10px 15px;
+  border-radius: 6px;
+  border: 1px solid #cbd5e1;
   background-color: #fff;
-  min-width: 200px;
+  font-size: 15px;
+  color: #334155;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.filter-select:focus {
+  border-color: #38a169;
+  box-shadow: 0 0 0 3px rgba(56, 161, 105, 0.2);
+}
+
+.clear-filters-btn {
+  background: #f1f5f9;
+  border: none;
+  border-radius: 6px;
+  padding: 10px;
+  font-weight: 500;
+  color: #64748b;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: all 0.2s ease;
+}
+
+.clear-filters-btn:hover {
+  background: #e2e8f0;
+  color: #334155;
 }
 
 .no-results {
@@ -700,6 +778,25 @@
   font-size: 1.2rem;
   color: var(--secondary-text);
   padding: 3rem 0;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.reset-search-btn {
+  background: #38a169;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 10px 20px;
+  font-weight: 500;
+  margin-top: 15px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.reset-search-btn:hover {
+  background: #2f855a;
 }
 
 
@@ -735,8 +832,6 @@
     .organization-grid {
       grid-template-columns: 1fr;
     }
-<<<<<<< HEAD:src/styles/Leadership.css
-    
     /* Mobile styles for leadership header */
     .leadership-container {
         padding: 60px 15px 30px;
@@ -756,6 +851,18 @@
         font-size: 1rem;
         margin: 20px auto 0;
     }
+    
+    .search-filter-section {
+      margin: 1.5rem 10px;
+    }
+    
+    .search-bar-container {
+      flex-wrap: nowrap;
+    }
+    
+    .filters-dropdown {
+      padding: 15px;
+    }
 }
 
 /* Additional mobile styles for very small screens */
@@ -770,17 +877,21 @@
     
     .leadership-header {
         padding: 25px 10px;
-=======
-    .filter-section {
-      padding: 0 1rem;
     }
-    .filter-container {
-      flex-direction: column;
-      align-items: stretch;
+    
+    .search-filter-section {
+        margin: 1.5rem auto;
     }
-    .dropdown-container {
-      flex-direction: column;
-      align-items: stretch;
->>>>>>> 541ef2c (Updated Leadership section and Navbar):src/Leadership/App.css
+    
+    .filter-toggle-btn {
+        padding: 14px 12px;
+    }
+    
+    .filter-toggle-btn span {
+        display: none;
+    }
+    
+    .filters-dropdown {
+        padding: 15px;
     }
 }

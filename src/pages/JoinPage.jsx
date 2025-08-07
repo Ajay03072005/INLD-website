@@ -119,13 +119,12 @@ const JoinPage = () => {
 
   return (
     <div className="join-container">
-      <h1> </h1><br></br>
-      <br />
-
-      <h1 className="join-title">Join the Movement</h1>
-      <p className="join-subtitle">
-        Be part of the change you want to see. Join thousands of citizens working towards a better India through INLD's vision of inclusive development.
-      </p>
+      <div className="join-header">
+        <h1 className="join-title">Join the Movement</h1>
+        <p className="join-subtitle">
+          Be part of the change you want to see. Join thousands of citizens working towards a better India through INLD's vision of inclusive development.
+        </p>
+      </div>
       <div className="join-cards">
         <div 
           className={`join-card ${selectedCategory === 'Ground Operations' ? 'selected' : ''}`} 

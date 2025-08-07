@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../styles/NewsPage.css';
-import { FaCalendarAlt, FaMapMarkerAlt, FaClock, FaTimes, FaUser, FaEnvelope, FaPhone } from 'react-icons/fa';
+import { FaCalendarAlt, FaMapMarkerAlt, FaClock, FaTimes, FaUser, FaEnvelope, FaPhone, FaArrowRight } from 'react-icons/fa';
 import { apiRequest, API_ENDPOINTS } from '../utils/api';
 
 const NewsPage = () => {
@@ -569,7 +569,7 @@ Target Areas: 12 drought-prone districts`,
     <div className="news-page">
       <div className="news-header">
         <h1>News & Events</h1>
-        <p>Stay updated with INLD's latest news and upcoming events</p>
+        <p>Stay updated with INLD's latest announcements, press releases, and upcoming events across Haryana</p>
       </div>
 
       <div className="tabs">
@@ -626,7 +626,7 @@ Target Areas: 12 drought-prone districts`,
                     className="read-more-btn"
                     onClick={() => setSelectedEvent(event)}
                   >
-                    Read More
+                    Read More <FaArrowRight style={{ marginLeft: '8px' }} />
                   </button>
                 </div>
               </div>
@@ -656,7 +656,7 @@ Target Areas: 12 drought-prone districts`,
                   className="read-more-btn"
                   onClick={() => setSelectedNews(item)}
                 >
-                  Read More
+                  Read More <FaArrowRight style={{ marginLeft: '8px' }} />
                 </button>
               </div>
             </div>
