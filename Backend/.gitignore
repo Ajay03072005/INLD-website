@@ -1,0 +1,81 @@
+# Compiled files
+*.class
+*.exe
+*.dll
+*.so
+*.dylib
+*.o
+*.a
+*.pyc
+__pycache__/
+
+# Logs and databases
+*.log
+*.sql
+*.sqlite
+*.db
+
+# Environment files
+.env
+.env.local
+.env.development
+.env.test
+.env.production
+.venv
+
+# Dependency directories
+node_modules/
+vendor/
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Build directories
+/dist/
+/build/
+/out/
+/target/
+/bin/
+/obj/
+
+# IDE specific files
+.DS_Store
+*.iml
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Coverage directory
+/coverage/
+
+# Documentation
+/docs/_build/
+
+# Local development files
+*.local
+*.bak
+*.tmp
+*.pid
+
+# OS generated files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+._*
+
+# Testing files
+/test-results/
+/junit.xml
+/coverage/
+
+# Package files
+*.jar
+*.war
+*.ear
+
+# Project specific files (adjust as needed)
+/appsettings.Development.json
+/appsettings.Staging.json

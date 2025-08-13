@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About INLD</title>
+  <!-- <link rel="stylesheet" href="style.css"> -->
+  <style>* {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      line-height: 1.7;
+      color: #2d3748;
+      background-color: #cfd1ce;
+    }
+
+    /* Navbar */
+    .navbar {
+     position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  background-color:#d1d9d7;
+  box-sizing: border-box;
+
+    }
+
+    .navbar-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 20px;
+      width: 100%;
+    }
+
+    .navbar-logo {
+      font-size: 1.8rem;
+      font-weight: bold;
+      margin-right: 40px; /* Added margin between logo and menu */
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .navbar-logo img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+    }
+
+    .navbar-menu {
+      display: flex;
+      list-style: none;
+      transition: max-height 0.3s ease;
+    }
+
+    .navbar-menu li {
+      margin-left: 20px;
+    }
+
+    .navbar-menu a {
+      color: rgb(31, 29, 29);
+      text-decoration: none;
+      font-size: 1rem;
+      transition: color 0.3s ease;
+    }
+
+    .navbar-menu a:hover {
+      color: #ffd700;
+    }
+
+    /* Mobile menu toggle */
+    .navbar-toggle {
+      display: none;
+      font-size: 1.8rem;
+      background: none;
+      border: none;
+      color: #222;
+      cursor: pointer;
+    }
+
+    /* Responsive Navbar */
+    @media (max-width: 768px) {
+      .navbar-menu {
+        flex-direction: column;
+        position: absolute;
+        top: 60px;
+        right: 0;
+        background: rgb(241, 246, 241);
+        width: 200px;
+        max-height: 0;
+        overflow: hidden;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        border-radius: 0 0 8px 8px;
+      }
+
+      .navbar-menu.show {
+        max-height: 500px;
+      }
+
+      .navbar-toggle {
+        display: block;
+      }
+    }
+
+    /* Cards & Sections (same as your original) */
+    .about-section {
+      padding: 5rem 1rem;
+      background: linear-gradient(135deg, #f4f7f4 0%, #e6e6fa 100%);
+    }
+
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 4rem;
+      animation: fadeIn 1s ease-out;
+    }
+
+    .section-header h1 {
+      font-size: 3.5rem;
+      font-weight: 700;
+      color: #1a202c;
+      margin-bottom: 1rem;
+    }
+    .card img{
+      /* position: fixed; */
+      height: 150px;
+      width: 150px;
+    
+    }
+
+    .section-header p {
+      font-size: 1.25rem;
+      color: #4a5568;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .content-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+
+    .card {
+      background: #fff;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(to right, #2f855a, #3182ce);
+    }
+
+    .card h2 {
+      font-size: 2rem;
+      font-weight: 600;
+      color: #1a202c;
+      margin-bottom: 1.5rem;
+    }
+
+    .card p {
+      color: #4a5568;
+      font-size: 1.1rem;
+    }
+
+    .symbol-card {
+      text-align: center;
+      position: relative;
+    }
+
+    .symbol-card img {
+      max-width: 200px;
+      height: auto;
+      margin: 0 auto 1.5rem;
+      border-radius: 8px;
+      transition: transform 0.3s ease;
+    }
+
+    .symbol-card:hover img {
+      transform: scale(1.05);
+    }
+
+    .core-focus, .achievements {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      justify-content: center;
+    }
+
+    .core-focus div, .achievements div {
+      background: #edf2f7;
+      padding: 1rem 2rem;
+      border-radius: 20px;
+      font-size: 1.1rem;
+      color: #2d3748;
+      transition: background 0.3s ease;
+      flex: 1 1 200px;
+      text-align: center;
+    }
+
+    .core-focus div:hover, .achievements div:hover {
+      background: #e6fffa;
+    }
+
+    .timeline {
+      position: relative;
+      padding: 2rem 0;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 0;
+      width: 4px;
+      height: 100%;
+      background: #2f855a;
+      transform: translateX(-50%);
+    }
+
+    .timeline-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 2rem;
+      position: relative;
+      width: 100%;
+    }
+
+    .timeline-item:nth-child(odd) .timeline-content {
+      text-align: right;
+      padding-right: 2rem;
+      margin-right: 50%;
+    }
+
+    .timeline-item:nth-child(even) .timeline-content {
+      text-align: left;
+      padding-left: 2rem;
+      margin-left: 50%;
+    }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      width: 16px;
+      height: 16px;
+      background: #2f855a;
+      border-radius: 50%;
+      transform: translateX(-50%);
+      z-index: 1;
+    }
+
+    .timeline-content {
+      background: #fff;
+      padding: 1.5rem;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      width: 45%;
+    }
+
+    .timeline-content h3 {
+      font-size: 1.5rem;
+      color: #1a202c;
+      margin-bottom: 0.5rem;
+    }
+
+    footer {
+      background: #1a202c;
+      color: #fff;
+      padding: 3rem 1rem;
+      text-align: center;
+    }
+
+    footer a {
+      color: #e6fffa;
+      text-decoration: none;
+      margin: 0 1rem;
+      transition: color 0.3s ease;
+    }
+
+    footer a:hover {
+      color: #2f855a;
+    }
+
+    .quick-links {
+      margin-bottom: 2rem;
+    }
+
+    .social-icons img {
+      width: 24px;
+      height: 24px;
+      margin: 0 0.5rem;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (min-width: 768px) {
+      .content-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .section-header h1 {
+        font-size: 4rem;
+      }
+
+      .section-header p {
+        font-size: 1.5rem;
+      }
+    }
+
+    @media (max-width: 767px) {
+      .section-header h1 {
+        font-size: 2.5rem;
+      }
+
+      .card h2, .timeline-content h3 {
+        font-size: 1.8rem;
+      }
+
+      .timeline::before {
+        left: 20px;
+      }
+
+      .timeline-item:nth-child(odd) .timeline-content,
+      .timeline-item:nth-child(even) .timeline-content {
+        text-align: left;
+        padding-left: 2.5rem;
+        margin: 0;
+        width: 100%;
+      }
+
+      .timeline-item::before {
+        left: 16px;
+      }
+    }
+    
+    .dal-logo{
+      
+        height: 50px;
+        width: 50px;
+        border-radius: 50%;
+        display: flex;
+
+    }
+    .containor{
+        margin-left: 700px;
+    }
+    .inld-hr{
+      position: relative;
+      margin-left: 15px;
+    }</style>
+</head>
+<body>
+  <header>
+  <nav class="navbar">
+    <div class="navbar-container">
+      <div class="navbar-logo">
+        <img src="inld.png" alt="INLD Logo">
+        INLD
+      </div>
+      <button class="navbar-toggle" aria-label="Toggle menu">☰</button>
+      <ul class="navbar-menu">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="leadership.html">Leadership</a></li>
+        <li><a href="news-events.html">News & Events</a></li>
+        <li><a href="manifesto.html">Manifesto</a></li>
+        <li><a href="media-gallery.html">Media Gallery</a></li>
+        <li><a href="join.html">Join the Movement</a></li>
+        <li><a href="contact.html">Contact Us</a></li>
+      </ul>
+    </div>
+  </nav>
+</header>
+
+  <section class="about-section">
+    <div class="container">
+      <!-- Section Header -->
+      <div class="section-header">
+        <h1>About Indian National Lok Dal</h1>
+        <p>A regional political party of Haryana committed to farmers' welfare, rural development, and regional pride.</p>
+      </div>
+
+      <!-- Symbol -->
+      <div class="card symbol-card">
+        <h2>Our Symbol</h2>
+        <img style="border-radius: 50%;" src="inld.png" alt="INLD Hand Pump Symbol">
+        <p>
+          The symbol, approved by the Election Commission of India, symbolizes our commitment to providing basic necessities to every citizen, particularly in rural areas of Haryana. It represents our dedication to grassroots development and ensuring that basic amenities like clean water reach every village and hamlet in our state.
+        </p>
+      </div>
+
+      <!-- Vision & Mission -->
+      <div  class="content-grid">
+        <div  class="card not1">
+          <h2>Our Vision</h2>
+          <p>
+            To make Haryana a prosperous state where farmers get fair prices for their produce, rural areas have modern infrastructure, and every citizen has access to quality education and healthcare. We envision a Haryana that leads in agricultural innovation while preserving its rich cultural heritage.
+          </p>
+        </div>
+        <div  class="card not2">
+          <h2>Our Mission</h2>
+          <p>
+            To serve as the voice of Haryana's farmers, rural communities, and working class. We are committed to implementing policies that promote agricultural prosperity, rural infrastructure development, and preserving the interests of Haryana at the national level.
+          </p>
+        </div>
+      </div>
+
+      <!-- Core Focus Areas -->
+      <div class="card">
+        <h2>Core Focus Areas</h2>
+        <div class="core-focus">
+          <div>Farmers' Rights</div>
+          <div>Rural Development</div>
+          <div>Regional Pride</div>
+          <div>Social Justice</div>
+        </div>
+      </div>
+
+      <!-- Our Journey -->
+      <div class="card">
+        <h2>Our Journey</h2>
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-content">
+              <h3>1999 - Party Formation</h3>
+              <p>INLD founded by Om Prakash Chautala after splitting from Janata Dal.</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-content">
+              <h3>1999-2005 - First Government</h3>
+              <p>Om Prakash Chautala served as Chief Minister of Haryana.</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-content">
+              <h3>2009 - Electoral Alliance</h3>
+              <p>Formed alliance with BJP for Lok Sabha elections.</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-content">
+              <h3>2014 - Independent Campaign</h3>
+              <p>Contested elections independently, focusing on regional issues.</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-content">
+              <h3>2019 - Coalition Government</h3>
+              <p>Dushyant Chautala became Deputy Chief Minister in BJP-JJP-INLD coalition.</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-content">
+              <h3>2024 - Party Reorganization</h3>
+              <p>Strengthened organization and grassroots presence in Haryana.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Founding Philosophy -->
+      <div class="card">
+        <h2>Founding Philosophy</h2>
+        <p>
+          "Indian National Lok Dal was founded in 1999 with a vision to represent the true interests of Haryana's people, especially our farmers and rural communities. Our party believes in regional autonomy within the national framework, ensuring that Haryana's voice is heard and respected in the corridors of power in Delhi." <br>— Founded by Chaudhary Om Prakash Chautala
+        </p>
+      </div>
+
+      <!-- Key Achievements -->
+      <div class="card">
+        <h2>Key Achievements</h2>
+        <div class="achievements">
+          <div>
+            <strong>Governance Record</strong><br>
+            Successfully governed Haryana from 1999-2005 under Om Prakash Chautala's leadership.
+          </div>
+          <div>
+            <strong>Agricultural Reforms</strong><br>
+            Pioneered several farmer-friendly policies and agricultural development programs.
+          </div>
+          <div>
+            <strong>Coalition Politics</strong><br>
+            Played key role in coalition governments, currently part of Haryana government.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  
+    <footer style="background:#0d172a; color:#fff; padding:3rem 2rem; font-family:'Inter',sans-serif;">
+  <div style="max-width:1200px; margin:auto; display:flex; flex-wrap:wrap; justify-content:space-between; gap:2rem;">
+    
+    <!-- Left Section -->
+    <div style="flex:1 1 250px;">
+      <div style="display:flex; align-items:center; gap:0.8rem; margin-bottom:0.5rem;">
+        <img src="inld.png" alt="INLD Logo" style="width:40px; height:40px; border-radius:50%;">
+        <div>
+          <h3 style="margin:0; font-weight:700;">Indian National Lok Dal</h3>
+          <p style="margin:0; font-size:0.9rem; color:#cbd5e1;">Serving the Nation</p>
+        </div>
+      </div>
+      <p style="font-size:0.95rem; color:#94a3b8; max-width:300px;">
+        Committed to building a prosperous, inclusive, and sustainable India 
+        where every citizen has equal opportunities to grow and contribute.
+      </p>
+    </div>
+
+    <!-- Quick Links -->
+    <div style="flex:1 1 150px;">
+      <h4 style="font-size:1.1rem; margin-bottom:0.8rem; font-weight:600;">Quick Links</h4>
+      <ul style="list-style:none; padding:0; margin:0; line-height:1.8;">
+        <li><a href="#" style="color:#cbd5e1; text-decoration:none;">About INLD</a></li>
+        <li><a href="#" style="color:#cbd5e1; text-decoration:none;">Our Manifesto</a></li>
+        <li><a href="#" style="color:#cbd5e1; text-decoration:none;">Leadership</a></li>
+        <li><a href="#" style="color:#cbd5e1; text-decoration:none;">News & Events</a></li>
+      </ul>
+    </div>
+
+    <!-- Contact Section -->
+    <div style="flex:1 1 200px;">
+      <h4 style="font-size:1.1rem; margin-bottom:0.8rem; font-weight:600;">Contact</h4>
+      <p style="font-size:0.95rem; color:#cbd5e1; line-height:1.6;">
+        123 Janpath, New Delhi<br>
+        Phone: +91-11-2345-6789<br>
+        Email: info@inld.org.in
+      </p>
+      <div style="margin-top:0.5rem;">
+        <a href="#" style="display:inline-block; width:32px; height:32px; background:#2563eb; color:white; text-align:center; line-height:32px; border-radius:6px; margin-right:0.4rem; text-decoration:none;">f</a>
+        <a href="#" style="display:inline-block; width:32px; height:32px; background:#0ea5e9; color:white; text-align:center; line-height:32px; border-radius:6px; margin-right:0.4rem; text-decoration:none;">t</a>
+        <a href="#" style="display:inline-block; width:32px; height:32px; background:#ef4444; color:white; text-align:center; line-height:32px; border-radius:6px; text-decoration:none;">▶</a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Bottom Footer -->
+  <div style="max-width:1200px; margin:2rem auto 0; border-top:1px solid #1e293b; padding-top:1rem; display:flex; flex-wrap:wrap; justify-content:space-between; color:#94a3b8; font-size:0.85rem;">
+    <p>© 2025 Indian National Lok Dal. All rights reserved.</p>
+    <div>
+      <a href="#" style="color:#94a3b8; text-decoration:none; margin-left:1rem;">Privacy Policy</a>
+      <a href="#" style="color:#94a3b8; text-decoration:none; margin-left:1rem;">Terms of Service</a>
+      <a href="#" style="color:#94a3b8; text-decoration:none; margin-left:1rem;">Disclaimer</a>
+    </div>
+  </div>
+</footer>
+
+
+</body>
+</html>
