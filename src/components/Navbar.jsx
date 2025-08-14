@@ -20,6 +20,22 @@ const Navbar = () => {
     setIsMoreOpen(!isMoreOpen);
   };
 
+  // Scroll to top handler for More dropdown links
+  const handleMoreDropdownClick = () => {
+    closeMenus();
+    setTimeout(() => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, 100);
+  };
+
+  // Scroll to top handler for main navigation links
+  const handleMainNavClick = () => {
+    closeMenus();
+    setTimeout(() => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, 100);
+  };
+
   const closeMenus = () => {
     setIsOpen(false);
     setIsMoreOpen(false);
@@ -49,7 +65,7 @@ const Navbar = () => {
           <Link 
             to="/" 
             className={`navbar__link ${isActive('/') ? 'active' : ''}`} 
-            onClick={closeMenus}
+            onClick={handleMainNavClick}
           >
             <AiFillHome className="navbar__icon" />
             <span>Home</span>
@@ -57,7 +73,7 @@ const Navbar = () => {
           <Link 
             to="/about" 
             className={`navbar__link ${isActive('/about') ? 'active' : ''}`}
-            onClick={closeMenus}
+            onClick={handleMainNavClick}
           >
             <BsFillInfoCircleFill className="navbar__icon" />
             <span>About</span>
@@ -65,7 +81,7 @@ const Navbar = () => {
           <Link 
             to="/news-events" 
             className={`navbar__link ${isActive('/news-events') ? 'active' : ''}`}
-            onClick={closeMenus}
+            onClick={handleMainNavClick}
           >
             <BsNewspaper className="navbar__icon" />
             <span>News</span>
@@ -73,19 +89,12 @@ const Navbar = () => {
           <Link 
             to="/join" 
             className={`navbar__link ${isActive('/join') ? 'active' : ''}`}
-            onClick={closeMenus}
+            onClick={handleMainNavClick}
           >
             <MdGroups className="navbar__icon" />
             <span>Join Us</span>
           </Link>
-          <Link 
-            to="/donate" 
-            className={`navbar__link navbar__link--donate ${isActive('/donate') ? 'active' : ''}`}
-            onClick={closeMenus}
-          >
-            <AiFillHeart className="navbar__icon" />
-            <span>Donate</span>
-          </Link>
+          
 
           {/* More Menu - Desktop */}
           <div className="navbar__more-menu">
@@ -100,7 +109,7 @@ const Navbar = () => {
               <Link 
                 to="/leadership" 
                 className={`navbar__dropdown-link ${isActive('/leadership') ? 'active' : ''}`}
-                onClick={closeMenus}
+                onClick={handleMoreDropdownClick}
               >
                 <BsPeopleFill className="navbar__icon" />
                 <span>Leadership</span>
@@ -108,7 +117,7 @@ const Navbar = () => {
               <Link 
                 to="/manifesto" 
                 className={`navbar__dropdown-link ${isActive('/manifesto') ? 'active' : ''}`}
-                onClick={closeMenus}
+                onClick={handleMoreDropdownClick}
               >
                 <GiScrollUnfurled className="navbar__icon" />
                 <span>Manifesto</span>
@@ -116,7 +125,7 @@ const Navbar = () => {
               <Link 
                 to="/gallery" 
                 className={`navbar__dropdown-link ${isActive('/gallery') ? 'active' : ''}`}
-                onClick={closeMenus}
+                onClick={handleMoreDropdownClick}
               >
                 <MdPhotoLibrary className="navbar__icon" />
                 <span>Gallery</span>
@@ -124,7 +133,7 @@ const Navbar = () => {
               <Link 
                 to="/blogs" 
                 className={`navbar__dropdown-link ${isActive('/blogs') ? 'active' : ''}`}
-                onClick={closeMenus}
+                onClick={handleMoreDropdownClick}
               >
                 <MdArticle className="navbar__icon" />
                 <span>Blogs</span>
@@ -132,7 +141,7 @@ const Navbar = () => {
               <Link 
                 to="/press-release" 
                 className={`navbar__dropdown-link ${isActive('/press-release') ? 'active' : ''}`}
-                onClick={closeMenus}
+                onClick={handleMoreDropdownClick}
               >
                 <RiFileTextFill className="navbar__icon" />
                 <span>Press Release</span>
@@ -140,7 +149,7 @@ const Navbar = () => {
               <Link 
                 to="/contact" 
                 className={`navbar__dropdown-link ${isActive('/contact') ? 'active' : ''}`}
-                onClick={closeMenus}
+                onClick={handleMoreDropdownClick}
               >
                 <MdContactPhone className="navbar__icon" />
                 <span>Contact</span>
@@ -199,11 +208,16 @@ const Navbar = () => {
               <span>Contact</span>
             </Link>
           </div>
-
-          <Link to="/login" className="navbar__cta-button" onClick={closeMenus}>
-            <RiAdminFill className="navbar__icon" />
-            <span>Admin</span>
+          <Link 
+            to="/donate" 
+            className={`navbar__link navbar__link--donate ${isActive('/donate') ? 'active' : ''}`}
+            onClick={handleMainNavClick}
+          >
+            <AiFillHeart className="navbar__icon" />
+            <span>Donate</span>
           </Link>
+
+         
         </div>
       </div>
     </nav>
